@@ -43,6 +43,14 @@ resource "aws_iam_role_policy" "github_builder" {
     Version = "2012-10-17"
     Statement = [
       {
+        Sid    = "OIDCProviderRead"
+        Effect = "Allow"
+        Action = [
+          "iam:GetOpenIDConnectProvider",
+        ]
+        Resource = aws_iam_openid_connect_provider.github.arn
+      },
+      {
         Sid    = "IAMUserManagement"
         Effect = "Allow"
         Action = [
