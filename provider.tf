@@ -9,11 +9,11 @@ terraform {
   }
 
   backend "s3" {
-    bucket         = "thebestbucketintheworld"
-    key            = "scaling-fiestae/terraform.tfstate"
-    region         = "us-west-2"
-    encrypt        = true
-    use_lockfile   = true
+    bucket       = "thebestbucketintheworld"
+    key          = "scaling-fiestae/terraform.tfstate"
+    region       = "us-west-2"
+    encrypt      = true
+    use_lockfile = true
   }
 }
 
