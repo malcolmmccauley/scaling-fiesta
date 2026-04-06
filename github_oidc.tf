@@ -43,12 +43,36 @@ resource "aws_iam_role_policy" "github_builder" {
     Version = "2012-10-17"
     Statement = [
       {
-        Sid    = "OIDCProviderRead"
+        Sid    = "OIDCProviderManagement"
         Effect = "Allow"
         Action = [
+          "iam:CreateOpenIDConnectProvider",
           "iam:GetOpenIDConnectProvider",
+          "iam:UpdateOpenIDConnectProviderThumbprint",
+          "iam:DeleteOpenIDConnectProvider",
+          "iam:TagOpenIDConnectProvider",
+          "iam:UntagOpenIDConnectProvider",
+          "iam:ListOpenIDConnectProviderTags",
         ]
         Resource = aws_iam_openid_connect_provider.github.arn
+      },
+      {
+        Sid    = "IAMRoleManagement"
+        Effect = "Allow"
+        Action = [
+          "iam:CreateRole",
+          "iam:GetRole",
+          "iam:UpdateRole",
+          "iam:DeleteRole",
+          "iam:TagRole",
+          "iam:UntagRole",
+          "iam:ListRoleTags",
+          "iam:UpdateAssumeRolePolicy",
+          "iam:GetRolePolicy",
+          "iam:PutRolePolicy",
+          "iam:DeleteRolePolicy",
+        ]
+        Resource = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/github_builder"
       },
       {
         Sid    = "IAMUserManagement"
@@ -86,7 +110,8 @@ resource "aws_iam_role_policy" "github_builder" {
           "dynamodb:DeleteItem",
           "dynamodb:DescribeTable",
           "dynamodb:DescribeContinuousBackups",
-          "dynamodb:DescribeTimeToLive"
+          "dynamodb:DescribeTimeToLive",
+          "dynamodb:ListTagsOfResource",
         ]
         Resource = "arn:aws:dynamodb:${var.aws_region}:${data.aws_caller_identity.current.account_id}:table/${var.state_lock_table}"
       }
