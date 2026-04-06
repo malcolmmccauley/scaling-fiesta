@@ -11,6 +11,7 @@ resource "aws_cloudwatch_dashboard" "aurora" {
         height = 6
         properties = {
           title  = "Aurora Database Connections"
+          region = var.aws_region
           period = 60
           stat   = "Average"
           view   = "timeSeries"

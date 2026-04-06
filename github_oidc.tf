@@ -90,6 +90,80 @@ resource "aws_iam_role_policy" "github_builder" {
         Resource = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:user/test"
       },
       {
+        Sid    = "EC2VPCManagement"
+        Effect = "Allow"
+        Action = [
+          "ec2:CreateVpc",
+          "ec2:DeleteVpc",
+          "ec2:DescribeVpcs",
+          "ec2:DescribeVpcAttribute",
+          "ec2:ModifyVpcAttribute",
+          "ec2:CreateSubnet",
+          "ec2:DeleteSubnet",
+          "ec2:DescribeSubnets",
+          "ec2:CreateSecurityGroup",
+          "ec2:DeleteSecurityGroup",
+          "ec2:DescribeSecurityGroups",
+          "ec2:AuthorizeSecurityGroupIngress",
+          "ec2:RevokeSecurityGroupIngress",
+          "ec2:AuthorizeSecurityGroupEgress",
+          "ec2:RevokeSecurityGroupEgress",
+          "ec2:CreateTags",
+          "ec2:DeleteTags",
+          "ec2:DescribeTags",
+          "ec2:DescribeAvailabilityZones",
+          "ec2:DescribeSecurityGroupRules",
+          "ec2:ModifySecurityGroupRules",
+        ]
+        Resource = "*"
+      },
+      {
+        Sid    = "RDSManagement"
+        Effect = "Allow"
+        Action = [
+          "rds:CreateDBCluster",
+          "rds:DeleteDBCluster",
+          "rds:DescribeDBClusters",
+          "rds:ModifyDBCluster",
+          "rds:CreateDBInstance",
+          "rds:DeleteDBInstance",
+          "rds:DescribeDBInstances",
+          "rds:ModifyDBInstance",
+          "rds:CreateDBSubnetGroup",
+          "rds:DeleteDBSubnetGroup",
+          "rds:DescribeDBSubnetGroups",
+          "rds:ModifyDBSubnetGroup",
+          "rds:AddTagsToResource",
+          "rds:RemoveTagsFromResource",
+          "rds:ListTagsForResource",
+          "rds:DescribeDBClusterParameters",
+          "rds:DescribeDBClusterParameterGroups",
+          "rds:DescribeEngineDefaultClusterParameters",
+        ]
+        Resource = "*"
+      },
+      {
+        Sid    = "SecretsManagerRead"
+        Effect = "Allow"
+        Action = [
+          "secretsmanager:DescribeSecret",
+          "secretsmanager:GetSecretValue",
+          "secretsmanager:ListSecretVersionIds",
+        ]
+        Resource = "arn:aws:secretsmanager:${var.aws_region}:${data.aws_caller_identity.current.account_id}:secret:rds!*"
+      },
+      {
+        Sid    = "CloudWatchDashboards"
+        Effect = "Allow"
+        Action = [
+          "cloudwatch:PutDashboard",
+          "cloudwatch:GetDashboard",
+          "cloudwatch:DeleteDashboards",
+          "cloudwatch:ListDashboards",
+        ]
+        Resource = "*"
+      },
+      {
         Sid    = "TerraformStateS3"
         Effect = "Allow"
         Action = [
