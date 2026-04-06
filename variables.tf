@@ -5,18 +5,21 @@ variable "aws_region" {
 }
 
 variable "github_org" {
-  description = "malcolmmccauley"
+  description = "GitHub organization or username that owns the repository"
   type        = string
+  default     = "malcolmmccauley"
 }
 
 variable "github_repo" {
-  description = "scaling-fiesta"
+  description = "GitHub repository name"
   type        = string
+  default     = "scaling-fiesta"
 }
 
 variable "state_bucket" {
-  description = "thebestbucketintheworld"
+  description = "S3 bucket name for Terraform state storage"
   type        = string
+  default     = "thebestbucketintheworld"
 }
 
 variable "state_lock_table" {
