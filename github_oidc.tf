@@ -71,6 +71,7 @@ resource "aws_iam_role_policy" "github_builder" {
           "iam:GetRolePolicy",
           "iam:PutRolePolicy",
           "iam:DeleteRolePolicy",
+          "iam:ListRolePolicies",
         ]
         Resource = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/github_builder"
       },
