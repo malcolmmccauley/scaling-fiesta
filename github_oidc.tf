@@ -139,6 +139,7 @@ resource "aws_iam_role_policy" "github_builder" {
           "rds:DescribeDBClusterParameters",
           "rds:DescribeDBClusterParameterGroups",
           "rds:DescribeEngineDefaultClusterParameters",
+          "rds:DescribeGlobalClusters",
         ]
         Resource = "*"
       },
